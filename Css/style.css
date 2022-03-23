@@ -76,5 +76,19 @@ font-family: 'Courier New', Courier, monospace;
     margin: 15px;
     position: relative;
     color: chocolate;
+}
 
+.entries{
+    position: relative;
+    margin-bottom: 20px;
+    color: chocolate;
+    font-size: larger;
+    font-family: monospace;
+    top: 160px;
+    left: 20px;
+}
+
+.priority--div > select{
+    height: 40px;
+    width: auto;
 }
