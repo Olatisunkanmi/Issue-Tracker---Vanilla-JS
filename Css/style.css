@@ -1,15 +1,5 @@
 /* styles for tickets dic */
 
-/* .column--tickets{
-    position: relative;
- 
-    border: 2px black solid; 
-    width: 30%;
-    padding: auto;
-    flex-wrap: wrap;
-    flex-direction: column;
-} */
-
 
 .tickets--div{
 position: relative;
@@ -39,7 +29,7 @@ flex:0 0 auto;
 }
 
 .High{
-    background-color: rgba(207, 71, 47, 0.596);
+    background-color: rgba(235, 67, 37, 0.596);
 }
  
 .Medium{
@@ -48,4 +38,19 @@ flex:0 0 auto;
 
 .Low{
     background-color: wheat;
+}
+
+.priority{
+    background-color: aliceblue;
+    width: 25%;
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    font-size: large;
+    font-weight: 500;
+}
+.delete{
+    position: relative;
+    left: 20px;
 }
