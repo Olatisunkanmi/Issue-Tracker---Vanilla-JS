@@ -47,7 +47,7 @@
                                     else if(type === 'Medium'){
                                    
                                     element = getAllDom.midDiv;
-                                    html = '<div id="Medium-%id"><h6>Issue ID: </h6><h5 class="status"></h5><p class="priority"><i class="fas fa-clock"></i>%Priority</p>' +
+                                    html = '<div id="Medium-%id" class="Medium"><h6>Issue ID: </h6><h5 class="status"></h5><p class="priority"><i class="fas fa-clock"></i>%Priority</p>' +
                                     '<h3 class="description--value"> %description</h3><p><i class="fas fa-address-card assigned--value"></i> %Assigned </p>' +
                                     '<a href="#"  class="btn btn-warning">Close</a><a href="#"  class="btn btn-danger">Delete</a></div>'
                                            
@@ -55,7 +55,7 @@
                                 
                                 else if(type === 'Low'){
                                     element = getAllDom.lowDiv;
-                                    html = '<div id="Low-%id"><h6>Issue ID: </h6><h5 class="status"></h5><p class="priority"><i class="fas fa-clock"></i>%Priority</p>' +
+                                    html = '<div id="Low-%id" class="Low"><h6>Issue ID: </h6><h5 class="status"></h5><p class="priority"><i class="fas fa-clock"></i>%Priority</p>' +
                                             '<h3 class="description--value"> %description</h3><p><i class="fas fa-address-card assigned--value"></i> %Assigned </p>' +
                                             '<a href="#"  class="btn btn-warning">Close</a><a href="#"  class="btn btn-danger">Delete</a></div>'
                                                    

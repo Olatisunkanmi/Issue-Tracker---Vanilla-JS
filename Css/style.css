@@ -31,8 +31,21 @@ flex:0 0 auto;
 }
 
 .High, .Medium, .Low{
-  border: 1px solid black;
+  border: 2px solid whitesmoke;
   padding: 10px;
+  border-radius: 5px;
   margin: 10px;
+
+}
+
+.High{
+    background-color: rgba(207, 71, 47, 0.596);
 }
  
+.Medium{
+    background-color: aquamarine;
+}
+
+.Low{
+    background-color: wheat;
+}
