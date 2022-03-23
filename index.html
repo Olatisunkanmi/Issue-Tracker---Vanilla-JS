@@ -12,42 +12,58 @@
             <div class="container">
                 
                         <div class="row">
-
-                                    <div class="jumbotron h-50 col-md-5">
-                                                <h1>Add New Issue</h1>
-                                              
-                                                  <div class="form-group">
-                                                      <label> Description</label>
-                                                      <input
-                                                      type="text"
-                                                      class="form-control description"
-                                                      placeholder=  " -- Briefly describe the issue --">
-
-                                                  </div>
-
-                                                  <div class="form-group">
-                                                        <label> Priority</label>
-
-                                                          <select  class="add--type">
-                                                              <option value="High" selected>High</option>
-                                                              <option value="Medium"  >Medium</option>
-                                                              <option value="Low" >Low</option>
-                                                          </select>
-                                                      </div>
-
-                                                  <div class="form-group">
-                                                    <label> Assigned to:</label>
-
-                                                    <input
-                                                      type="text"
-                                                      class="form-control assigned"
-                                                      placeholder="Enter the name of the Assigned">
-                                                    
-                                                  </div>
-
-                                                  <button type="submit" class="btn btn-primary create--issues">Create Issue</button>
+                              <div class="col-md-5">
                                   
-                                    </div>
+                                <div class="issue--header">
+                                    <h1>Add New Issue</h1>  
+                                    <p>Created with Closures and Es6 Vanilla JS</p>
+
+                                </div>
+                              
+
+                              </div>
+                                      
+                            
+                       <div class="col-md-7 issue--div">
+
+                                <div class="form-group desc">
+                                  <h3>Description</h3>
+                                  <input
+                                  type="text"
+                                  class="form-control description"
+                                  placeholder=  " -- Briefly describe the issue --">
+
+                              </div>
+
+                              <div class="form-group priority--div">
+                                   <h5>Priority</h5>
+
+                                      <select  class="add--type">
+                                          <option value="High" selected>High</option>
+                                          <option value="Medium"  >Medium</option>
+                                          <option value="Low" >Low</option>
+                                      </select>
+                                  </div>
+
+                              <div class="form-group assigned--div">
+                                <h5>Assigned To:</h5>
+
+                                <input
+                                  type="text"
+                                  class="form-control assigned"
+                                  placeholder="Enter the name of the Assigned">
+
+                              </div>
+            <button type="submit" class="btn btn-primary create--issues">Create Issue</button>
+
+              
+            
+
+
+
+                              </div>
+                                              
+                                                  
 
 
                         </div>

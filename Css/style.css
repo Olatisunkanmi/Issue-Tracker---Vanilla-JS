@@ -1,5 +1,7 @@
 /* styles for tickets dic */
-
+body{
+    background-color: rgb(97, 96, 96);
+}
 
 .tickets--div{
 position: relative;
@@ -27,6 +29,10 @@ flex:0 0 auto;
   margin: 10px;
 
 }
+.High, .Medium, .Low > h3{
+font-family: 'Courier New', Courier, monospace;
+}
+
 
 .High{
     background-color: rgba(235, 67, 37, 0.596);
@@ -53,4 +59,22 @@ flex:0 0 auto;
 .delete{
     position: relative;
     left: 20px;
+}
+.issue--header{
+    position: relative;
+    top: 70px;
+    margin: 25px;
+    color: chocolate;
+}
+
+.issue--div{
+    position: relative;
+    margin-top: 40px;
+    
+}
+.priority--div, .assigned--div, .desc{
+    margin: 15px;
+    position: relative;
+    color: chocolate;
+
 }
