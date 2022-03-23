@@ -38,36 +38,37 @@
                             let html, element, newHtml;
                                         if (type === 'High') {                                
                                         element = getAllDom.highDiv;
-                                        html = '<div id="High-%id"><h6>Issue ID: </h6><h5 class="status"></h5><p class="priority"><i class="fas fa-clock"></i>%Priority</p> '+ 
-                                        '<h3 class="description--value"> %description</h3><p><i class="fas fa-address-card assigned--value"></i> %Assigned </p> '+
-                                        '<a href="#"  class="btn btn-warning">Close</a><a href="#"  class="btn btn-danger">Delete</a></div>'
-                               
+                                            html = '<div id="High-%id" class="High"><h6>Issue ID: </h6><h5 class="status"></h5><p class="priority"><i class="fas fa-clock"></i>%Priority</p>' +
+                                            '<h3 class="description--value"> %description</h3><p><i class="fas fa-address-card assigned--value"></i> %Assigned </p>' +
+                                            '<a href="#"  class="btn btn-warning">Close</a><a href="#"  class="btn btn-danger">Delete</a></div>'
+                                                                        
                                     }   
                                     
                                     else if(type === 'Medium'){
                                    
                                     element = getAllDom.midDiv;
-                                    html = '<div id="Medium-%id"><h6>Issue ID: </h6><h5 class="status"></h5><p class="priority"><i class="fas fa-clock"></i>%Priority</p> '+ 
-                                    '<h3 class="description--value"> %description</h3><p><i class="fas fa-address-card assigned--value"></i> %Assigned </p> '+
+                                    html = '<div id="Medium-%id"><h6>Issue ID: </h6><h5 class="status"></h5><p class="priority"><i class="fas fa-clock"></i>%Priority</p>' +
+                                    '<h3 class="description--value"> %description</h3><p><i class="fas fa-address-card assigned--value"></i> %Assigned </p>' +
                                     '<a href="#"  class="btn btn-warning">Close</a><a href="#"  class="btn btn-danger">Delete</a></div>'
-                           
+                                           
                                 }  
                                 
                                 else if(type === 'Low'){
-                                    element = getAllDom.highDiv;
-                                    html = '<div id="Low-%id"><h6>Issue ID: </h6><h5 class="status"></h5><p class="priority"><i class="fas fa-clock"></i>%Priority</p> '+ 
-                                    '<h3 class="description--value"> %description</h3><p><i class="fas fa-address-card assigned--value"></i> %Assigned </p> '+
-                                    '<a href="#"  class="btn btn-warning">Close</a><a href="#"  class="btn btn-danger">Delete</a></div>'
-                               
+                                    element = getAllDom.lowDiv;
+                                    html = '<div id="Low-%id"><h6>Issue ID: </h6><h5 class="status"></h5><p class="priority"><i class="fas fa-clock"></i>%Priority</p>' +
+                                            '<h3 class="description--value"> %description</h3><p><i class="fas fa-address-card assigned--value"></i> %Assigned </p>' +
+                                            '<a href="#"  class="btn btn-warning">Close</a><a href="#"  class="btn btn-danger">Delete</a></div>'
+                                                   
                                 }
 
                                 // newHtml = html.replace('%id', newItem.id);
-                              
-                                newHtml = html.replace('%description', newItem.des);
+                                newHtml = html.replace('%id', newItem.ID)
+                                newHtml = newHtml.replace('%description', newItem.des);
                                 newHtml = newHtml.replace('%Assigned', newItem.assigned);
+                                newHtml = newHtml.replace('%Priority', type)
                                 
 
-                                document.querySelector(element).insertAdjacentHTML('beforebegin', newHtml);
+                                document.querySelector(element).insertAdjacentHTML('beforeend' ,newHtml);
                                 
                           }
                           
