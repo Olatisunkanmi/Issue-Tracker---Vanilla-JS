@@ -10,7 +10,8 @@
                     issuesInputBtn: '.create--issues',
                     lowDiv: '.Low-div',
                     midDiv: '.Mid-div',
-                    highDiv: '.High-div'
+                    highDiv: '.High-div',
+                    delContainer: '.tickets--div'
                 }
             
                 
@@ -35,12 +36,13 @@
                                          * 
                                          */
                             addListItem: (type, newItem) => {
+                                
                             let html, element, newHtml;
                                         if (type === 'High') {                                
                                         element = getAllDom.highDiv;
                                             html = '<div id="High-%id" class="High"><h6>Issue ID: </h6><h5 class="status"></h5><p class="priority">%Priority</p>' +
                                             '<h3 class="description--value"> %description</h3><p><i class="fas fa-address-card assigned--value"></i> %Assigned </p>' +
-                                            '<a href="#"  class="btn btn-warning close">Close</a><a href="#"  class="btn btn-danger delete">Delete</a></div>'
+                                            '<button class="btn btn-warning"> Close </button><button class="btn btn-danger delete">Delete</button></div>'
                                                                         
                                     }   
                                     
@@ -49,7 +51,7 @@
                                     element = getAllDom.midDiv;
                                     html = '<div id="Medium-%id" class="Medium"><h6>Issue ID: </h6><h5 class="status"></h5><p class="priority">%Priority</p>' +
                                     '<h3 class="description--value"> %description</h3><p><i class="fas fa-address-card assigned--value"></i> %Assigned </p>' +
-                                    '<a href="#"  class="btn btn-warning close">Close</a><a href="#"  class="btn btn-danger delete">Delete</a></div>'
+                                    '<button class="btn btn-warning"> Close </button><button class="btn btn-danger delete">Delete</button></div>'
                                            
                                 }  
                                 
@@ -57,12 +59,11 @@
                                     element = getAllDom.lowDiv;
                                     html = '<div id="Low-%id" class="Low"><h6>Issue ID: </h6><h5 class="status"></h5><p class="priority">%Priority</p>' +
                                             '<h3 class="description--value"> %description</h3><p><i class="fas fa-address-card assigned--value"></i> %Assigned </p>' +
-                                            '<a href="#"  class="btn btn-warning close">Close</a><a href="#"  class="btn btn-danger delete">Delete</a></div>'
+                                            '<button class="btn btn-warning"> Close </button> <button class="btn btn-danger delete">Delete</button> </div>'
                                                    
                                 }
-
-                                // newHtml = html.replace('%id', newItem.id);
-                                newHtml = html.replace('%id', newItem.ID)
+                               
+                                newHtml = html.replace('%id', newItem.id);
                                 newHtml = newHtml.replace('%description', newItem.des);
                                 newHtml = newHtml.replace('%Assigned', newItem.assigned);
                                 newHtml = newHtml.replace('%Priority', type)
@@ -109,25 +110,21 @@
                 return {
                     // creating new items, item are grouped according to piority
                      createItems: (type, des, assigned) => {
-let newItem, ID,index, ids;
-
-
-        //----->>>>  ----->>>>>  ------->>>>>>>>    ------<<<<<<--------
-                            
-                        
+                let newItem, ID,index, ids;
+    //----->>>>  ----->>>>>  ------->>>>>>>>    ------<<<<<<--------
                                         if (data.allItems[type].length > 0) {
                                             ID = data.allItems[type][data.allItems[type].length -1].id +1;
-                                            //   console.log(ID);
+                                            
                             
                                         } else {
                                             ID = 0;
-                                            //    console.log(ID);
+                                        
                                         }
                                         
                                 
                             if (type === 'High') {
-                                            newItem = new allItemsFunc(ID, des, assigned);
-                                                }
+                            newItem = new allItemsFunc(ID, des, assigned);
+                                }
 
                                 else  if (type === 'Medium') {
                                     newItem = new allItemsFunc(ID, des, assigned);
@@ -142,14 +139,54 @@ let newItem, ID,index, ids;
                                 // console.log(data.allItems[type]);
 
                                 // data.allItems.length
-                            ids = data.allItems[type].map(current => {
-                                return current.id;
-                                });
-
+                           
+                                
                                 // console.log( data.allItems[type]);
                             // returning the newly created element 
                             return newItem;
-                                }
+                                },
+
+                deleteItems: (type, id) => {
+                    let ids, index;
+                    ids = data.allItems[type].map(current => current.id)
+                    
+                    /**'ids' is the current array that returns the current Id 
+                     * to delete an element of an array well.
+                     * deleting the index of the item is what we need to do.
+                     */
+                    index = ids.indexOf(id);
+
+
+                    /**
+                     * but after the 'index' is set to the ['ids.indexOf(id)' which is 0]
+                     */
+                    console.log(index);
+                   
+                    /**  the index of an empty array is usually -1
+                     * 
+                     * but we set index to 0
+                     *                  'ids.indexOf(id)'
+                     *
+                     */
+                    if(index !== -1){
+                        /**if true. remove the delete the array index set to 0
+                         */
+                        data.allItems[type].splice(index, 1);
+                    }
+                },
+
+                updateItems : () => {
+                    let High, Mid, Low;
+
+                    High = data.allItems['High'].length;
+                    Mid = data.allItems['Mid'].length;
+                    Low = data.allItems['Low'].length;
+
+                    console.log(High);
+                    console.log(Mid);
+                    console.log(Low);
+
+                }
 
 
     }   
@@ -158,37 +195,31 @@ let newItem, ID,index, ids;
             
             
                             // This function comm. between the function and control all functions can not run independently.
-                        const trackerController = ((uiCtrl, dataController) => {
+  const trackerController = ((uiCtrl, dataController) => {
 
                             const init = () => {
 
                                 // Getting the DOM strings 
                             let getAllDom = uiCtrl.allDom();
-                                document.querySelector(getAllDom.issuesInputBtn).addEventListener("click", function() {
-                                ctrlAddItem()
+                                document.querySelector(getAllDom.issuesInputBtn).addEventListener("click", ctrlAddItem)
+                                document.querySelector(getAllDom.delContainer).addEventListener("click", ctrlDelItem)
+                              
 
-                                    })
-                        
                             }
 
 
-                              const ctrlAddItem = () => {
+const ctrlAddItem = () => {
                 
-                              const domInput = uiCtrl.domInput();
-                // {domInput.description, domInput.medium, domInput.assigned } : domInput
-                              if(domInput.description !== "" || domInput.assigned !== ""){  
-                              console.log(domInput.type);
-
+                    const domInput = uiCtrl.domInput();
+                    // {domInput.description, domInput.medium, domInput.assigned } : domInput
+                    if(domInput.description !== "" || domInput.assigned !== ""){  
                             /* Using the %priority of the tasks, description and assigned to 
                                 to create item and save each of them in an array
                                 
                                 so each item can be located easily for sorting.
                                 */
-
-
                     const createItems = dataController.createItems(domInput.type, domInput.description, domInput.assigned)
-                                console.log(createItems);
-
+                    console.log(createItems);
                         /*
                         this function sends the piory to the other function to input into Dom
                                                             <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -198,10 +229,33 @@ let newItem, ID,index, ids;
                                                             <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
                          */     
-                    const addEvents =  uiCtrl.addListItem(domInput.type, createItems);
-                                
-                       }
-             }
+                    uiCtrl.addListItem(domInput.type, createItems);
+                       
+                                     }
+        }
+
+
+        const ctrlDelItem = (event) => {
+            let pNode, type, ID, splitNode;
+            pNode = event.target.parentNode.id;
+           
+        if (pNode) {
+            splitNode = pNode.split('-');
+            type = splitNode[0];
+            ID = parseInt(splitNode[1]);
+            
+            /**
+             * Delete Item from the data.allItems[type]
+             */
+
+            const delItem = dataController.deleteItems(type, ID);
+            
+            dataController.updateItems();
+        }
+           
+        }   
+
+
 
                 
 
