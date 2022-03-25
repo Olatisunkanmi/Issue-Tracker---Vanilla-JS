@@ -11,7 +11,8 @@
                     lowDiv: '.Low-div',
                     midDiv: '.Mid-div',
                     highDiv: '.High-div',
-                    delContainer: '.tickets--div'
+                    delContainer: '.tickets--div',
+                    arrNo: '.entries'
                 }
             
                 
@@ -71,6 +72,25 @@
 
                                 document.querySelector(element).insertAdjacentHTML('beforeend' ,newHtml);
                                 
+                          },
+
+                          updateUi: (pNode, ID) => {
+                              let html, container, newHtml
+                                const el = document.getElementById(pNode);
+                                el.parentNode.removeChild(el);
+
+                          },
+
+                          updateArrayNo: (ID) => {
+                            let html, container, newHtml
+
+                            container = getAllDom.arrNo;
+                            html = ' <p>NO.of Entries :<span> %- </span></p>'
+
+                            newHtml = html.replace('%-', ID)
+                            
+                        document.querySelector(container).textContent = newHtml;
+
                           }
                           
               
@@ -155,12 +175,12 @@
                      * deleting the index of the item is what we need to do.
                      */
                     index = ids.indexOf(id);
-
+                    
 
                     /**
                      * but after the 'index' is set to the ['ids.indexOf(id)' which is 0]
                      */
-                    console.log(index);
+                    // console.log(index);
                    
                     /**  the index of an empty array is usually -1
                      * 
@@ -175,17 +195,42 @@
                     }
                 },
 
-                updateItems : () => {
-                    let High, Mid, Low;
+                updateItems : (id, type) => {
+                    let High, Mid, Low, arrayNo, ids;
 
-                    High = data.allItems['High'].length;
-                    Mid = data.allItems['Mid'].length;
-                    Low = data.allItems['Low'].length;
+                    High = parseInt(data.allItems['High'].length);
+                    Mid = parseInt(data.allItems['Medium'].length);
+                    Low = parseInt(data.allItems['Low'].length);
+                        
+                    arrayNo = (High + Mid) + Low;
 
-                    console.log(High);
-                    console.log(Mid);
-                    console.log(Low);
+                    return arrayNo;
 
+
+                    /*
+                    ids = data.allItems;
+                    console.log(ids);
+                    ids = data.allItems[type].map((current) => {
+                        current.id
+                         for (const cur of data.allItems[type]) {
+                         return data.allItems[type].length
+                    }
+                    })
+                    const newArr = (...ids) => {
+                        console.log(ids);
+                        const element = ids.indexOf(ids)
+                        for (let i = 0; i < ids.length; i++) {
+                            const element = ids.indexof(i);
+                                console.log(element);
+                        }
+                        
+                        console.log(element);
+
+                        
+                    }
+                          
+                    newArr(ids)
+                    */
                 }
 
 
@@ -219,7 +264,7 @@ const ctrlAddItem = () => {
                                 so each item can be located easily for sorting.
                                 */
                     const createItems = dataController.createItems(domInput.type, domInput.description, domInput.assigned)
-                    console.log(createItems);
+                    console.log(createItems.id);
                         /*
                         this function sends the piory to the other function to input into Dom
                                                             <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -229,9 +274,12 @@ const ctrlAddItem = () => {
                                                             <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
                          */     
-                    uiCtrl.addListItem(domInput.type, createItems);
-                       
+                  uiCtrl.addListItem(domInput.type, createItems);
+                  updateNoArr(dataController, createItems.id, domInput.type);
+                  
+
                                      }
+                            
         }
 
 
@@ -247,13 +295,24 @@ const ctrlAddItem = () => {
             /**
              * Delete Item from the data.allItems[type]
              */
+                dataController.deleteItems(type, ID);
+                updateNoArr(dataController, type, ID);
+                
+                /* Update Ui by also deleting 
+                the Div of the deleted Ui from the user interface.
+             */
 
-            const delItem = dataController.deleteItems(type, ID);
-            
-            dataController.updateItems();
-        }
+                uiCtrl.updateUi(pNode);
+                         }
            
         }   
+
+        const  updateNoArr = (dataController, type, ID) => {
+            const updateArrayNo = dataController.updateItems(type, ID);
+
+            uiCtrl.updateArrayNo(updateArrayNo);
+        }
+        
 
 
 
@@ -272,3 +331,4 @@ const ctrlAddItem = () => {
 
 
 trackerController.initialize();
+
