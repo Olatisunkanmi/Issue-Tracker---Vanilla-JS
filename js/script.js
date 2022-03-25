@@ -12,7 +12,7 @@
                     midDiv: '.Mid-div',
                     highDiv: '.High-div',
                     delContainer: '.tickets--div',
-                    arrNo: '.entries'
+                    arrNo: '.entry-Id'
                 }
             
                 
@@ -67,7 +67,7 @@
                                 newHtml = html.replace('%id', newItem.id);
                                 newHtml = newHtml.replace('%description', newItem.des);
                                 newHtml = newHtml.replace('%Assigned', newItem.assigned);
-                                newHtml = newHtml.replace('%Priority', type)
+                                newHtml = newHtml.replace('%Priority', type);
                                 
 
                                 document.querySelector(element).insertAdjacentHTML('beforeend' ,newHtml);
@@ -81,15 +81,10 @@
 
                           },
 
-                          updateArrayNo: (ID) => {
-                            let html, container, newHtml
-
-                            container = getAllDom.arrNo;
-                            html = ' <p>NO.of Entries :<span> %- </span></p>'
-
-                            newHtml = html.replace('%-', ID)
+                          updateArrayNo: (ID) => {  
+                        
                             
-                        document.querySelector(container).textContent = newHtml;
+                        document.querySelector(getAllDom.arrNo).textContent = ID;
 
                           }
                           
