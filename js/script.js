@@ -86,6 +86,19 @@
                             
                         document.querySelector(getAllDom.arrNo).textContent = ID;
 
+                          },
+
+                          clearInputtFields: () => {
+                              let arrFields, field;
+
+                              field = document.querySelectorAll(getAllDom.inputDescription + ',' + getAllDom.inputAssigned);
+                            //   console.log(field);  
+
+                              arrFields = Array.prototype.slice.call(field);
+                              
+                              arrFields.forEach(current => current.value = '');
+
+                              arrFields[0].focus();
                           }
                           
               
@@ -241,8 +254,13 @@
 
                                 // Getting the DOM strings 
                             let getAllDom = uiCtrl.allDom();
-                                document.querySelector(getAllDom.issuesInputBtn).addEventListener("click", ctrlAddItem)
-                                document.querySelector(getAllDom.delContainer).addEventListener("click", ctrlDelItem)
+                                document.querySelector(getAllDom.issuesInputBtn).addEventListener("click", ctrlAddItem);
+                                document.querySelector(getAllDom.delContainer).addEventListener("click", ctrlDelItem);
+                                document.addEventListener('keypress', (event) => {
+                                    if(event.keypress === 13 || event.which === 13){
+                                        ctrlAddItem()
+                                    }
+                                })
                               
 
                             }
@@ -252,14 +270,15 @@ const ctrlAddItem = () => {
                 
                     const domInput = uiCtrl.domInput();
                     // {domInput.description, domInput.medium, domInput.assigned } : domInput
-                    if(domInput.description !== "" || domInput.assigned !== ""){  
+                    if(domInput.description !== "" && domInput.assigned !== ""){ 
+
                             /* Using the %priority of the tasks, description and assigned to 
                                 to create item and save each of them in an array
                                 
                                 so each item can be located easily for sorting.
                                 */
                     const createItems = dataController.createItems(domInput.type, domInput.description, domInput.assigned)
-                    console.log(createItems.id);
+                    // console.log(createItems.id);
                         /*
                         this function sends the piory to the other function to input into Dom
                                                             <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -272,7 +291,7 @@ const ctrlAddItem = () => {
                   uiCtrl.addListItem(domInput.type, createItems);
                   updateNoArr(dataController, createItems.id, domInput.type);
                   
-
+                    uiCtrl.clearInputtFields()
                                      }
                             
         }
